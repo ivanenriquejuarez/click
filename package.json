@@ -1,0 +1,24 @@
+{
+  "name": "click",
+  "version": "0.1.0",
+  "description": "A browser automation tool that opens a URL in multiple concurrent instances and performs click actions on target elements",
+  "homepage": "https://github.com/ivanenriquejuarez/click#readme",
+  "bugs": {
+    "url": "https://github.com/ivanenriquejuarez/click/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivanenriquejuarez/click.git"
+  },
+  "license": "ISC",
+  "author": "ivanenriquejuarez",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.2.3",
+    "typescript": "^5.9.3"
+  }
+}
