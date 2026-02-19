@@ -3,17 +3,32 @@ import { chromium } from 'playwright';
 import type { Browser } from "playwright";
 
 export async function runBrowserTask(input: BrowserTaskInput): Promise<BrowserTaskResult> {
+
     const startTime = Date.now();
     let browser: Browser | null = null;
     try {
         // Step 1: Open Browser
         console.log("Step 1: Launching Chromium...");
-        browser = await chromium.launch();
+        // Check if we are using proxy console log
+        if (input.proxy) {
+            console.log(`Using proxy: ${input.proxy}`);
+        } else {
+            console.log("Not proxy, using direct connection!");
+        }
+        browser = await chromium.launch({
+            proxy: input.proxy ? { server: input.proxy } : undefined // If proxy exists do if not its undefined
+        });
 
         // Step 2: Go to page
         console.log("Step 2: Going to URL - ", input.url);
-        const page = await browser.newPage();
-        await page.goto(input.url);
+        const context = await browser.newContext({ ignoreHTTPSErrors: true});   // Create a context preferenece w bypass of http cert
+        const page = await context.newPage();
+        const response = await page.goto(input.url);
+
+        // Check if page loaded correctly
+        if (!response || response.status() !== 200) {
+            throw new Error(`Page failed to load - status ${response?.status()}`)
+        }
 
         // Step 3: Find 'Learn more' link and click
         await page.locator(input.selector).click();
@@ -46,9 +61,10 @@ export async function runBrowserTask(input: BrowserTaskInput): Promise<BrowserTa
         url: "https://example.com",
         selector: "a",
         mode: "headless",
-        timeout: 30000,
+        timeout: 10000,
         retryAttempts: 0,
-        retryDelay: 1000
+        retryDelay: 1000,
+        proxy: "socks5://104.200.152.30:4145"
     });
     console.log(result);
 })();
