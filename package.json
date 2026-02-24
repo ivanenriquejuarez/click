@@ -1,6 +1,6 @@
 {
   "name": "click",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A browser automation tool that opens a URL in multiple concurrent instances and performs click actions on target elements",
   "homepage": "https://github.com/ivanenriquejuarez/click#readme",
   "bugs": {
