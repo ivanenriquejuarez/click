@@ -1,4 +1,4 @@
-import type { BrowserTaskInput, BrowserTaskResult } from "../shared/types.js";
+import type { BrowserTaskInput, BrowserTaskResult } from "@/shared/types.js";
 import { chromium } from 'playwright';
 import type { Browser } from "playwright";
 
@@ -62,6 +62,7 @@ export async function runBrowserTask(input: BrowserTaskInput): Promise<BrowserTa
     }
 }
 
+/*
 (async () => {
     const result = await runBrowserTask({
         taskId: "test-001",
@@ -75,3 +76,4 @@ export async function runBrowserTask(input: BrowserTaskInput): Promise<BrowserTa
     });
     console.log(result);
 })();
+*/
