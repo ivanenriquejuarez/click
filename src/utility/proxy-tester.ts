@@ -23,7 +23,8 @@ export async function proxyTester(input: ProxyTestRequest): Promise<ProxyTestRes
             });
 
             // Step 2: Create a page
-            const page = await browser.newPage();
+            const context = await browser.newContext({ ignoreHTTPSErrors: true});   // With shit proxies we get invalid certs- this bypasses it
+            const page = await context.newPage();
 
             // Step 3: Go to endpoint
             const response = await page.goto(input.targetUrl, { timeout: 10000});
@@ -73,7 +74,7 @@ export async function proxyTester(input: ProxyTestRequest): Promise<ProxyTestRes
             "152.53.168.53:47857",
             "104.200.152.30:4145"
         ],
-        targetUrl: "https://example.com"
+        targetUrl: "https://www.iana.org/help/example-domains"
     });
     console.log(result);
 })();
