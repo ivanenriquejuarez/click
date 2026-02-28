@@ -13,7 +13,7 @@
 
 ### Backend responds:
 - jobId - unique ID for this job
-- status - "started" or "rejected"
+- status - "idle" or "rejected"
 - message - why it was rejected (only if rejected)
 
 ---
@@ -27,7 +27,7 @@ List of all jobs, each with:
 - jobId
 - url
 - selector
-- status (running, completed, cancelled, failed)
+- status (idle, running, completed, failed, stopped, rejected)
 - totalInstances
 - succeeded
 - failed
@@ -42,7 +42,7 @@ Nothing (job ID is in the URL)
 - jobId
 - url
 - selector
-- status (running, completed, cancelled, failed)
+- status (idle, running, completed, failed, stopped, rejected)
 - totalInstances
 - succeeded
 - failed
@@ -64,7 +64,7 @@ Nothing (job ID is in the URL)
 
 ### Backend responds:
 - jobId
-- status ("cancelled" or "not_found")
+- status ("stopped" or "not_found")
 - message
 
 ---
