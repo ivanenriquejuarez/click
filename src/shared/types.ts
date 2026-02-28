@@ -35,7 +35,7 @@ export interface CreateJobRequest {
 
 export interface CreateJobResponse {
     jobId: string;
-    status: "started" | "rejected";
+    status: "idle" | "rejected";
     message?: string;
 }
 
@@ -44,7 +44,7 @@ export interface JobSummary {
     jobId: string;
     url: string;
     selector: string;
-    status: "running" | "completed" | "cancelled" | "failed";
+    status: "idle" | "running" | "completed" | "failed" | "stopped" | "rejected";
     totalInstances: number;
     succeeded: number;
     failed: number;
@@ -74,7 +74,7 @@ export interface GetOneJobResponse extends JobSummary {
 // 4. Delete Job (DELETE /api/jobs/:id)
 export interface DeleteJobResponse {
     jobId: string;
-    status: "cancelled" | "not_found";
+    status: "stopped" | "not_found";
     message: string;
 }
 
